@@ -6,3 +6,5 @@
 
 #Dikjstra's Algorithm is used to find the shortest distance between a vertex and other vertices in a weighted graph. Fibonacci Heap is used to optimize the algorithm to find the best insertion position sequentially. 
 
+#KD Alogrithm is a space partioning set in a k-dimensional set. KD Algorithm is useful in searches invloving a multidimensional search key. KD Trees are a special way of partioning binary space partioning trees. 
+
