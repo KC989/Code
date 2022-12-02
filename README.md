@@ -8,3 +8,5 @@
 
 #KD Alogrithm is a space partioning set in a k-dimensional set. KD Algorithm is useful in searches invloving a multidimensional search key. KD Trees are a special way of partioning binary space partioning trees. 
 
+# Trie is a kind of n-ary tree structure for storing and searching a specific key from a set.
+
