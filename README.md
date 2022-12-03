@@ -10,3 +10,4 @@
 
 #Trie is a kind of n-ary tree structure for storing and searching a specific key from a set.
 
+#Sum of Range of Query in Segment Tree. I chose Segment Tree because it is more powerful than a fenwick tree as a fenwick tree can calcualte prefix sums, and segment tree can calculate on any sub segment. 
