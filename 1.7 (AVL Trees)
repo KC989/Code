@@ -3,8 +3,8 @@
 
 struct Nod {
   int key;
-  struct Nod *left;
-  struct Nod *right;
+  struct Nod *lefty;
+  struct Nod *righty;
   int height;
 };
 
@@ -24,8 +24,8 @@ struct Node *nNod(int key) {
   struct Node *nod = (struct Nod *)
     malloc(sizeof(struct Nod));
   node->key = key;
-  node->left = NULL;
-  node->right = NULL;
+  node->lefty = NULL;
+  node->righty = NULL;
   node->height = 1;
   return (node);
 }
@@ -44,8 +44,8 @@ struct Nod *rightRotate(struct Nod *y) {
 }
 
 struct Nod *leftRotate(struct Node *x) {
-  struct Nod *y = x->right;
-  struct Nod *T2 = y->left;
+  struct Nod *y = x->righty;
+  struct Nod *T2 = y->lefty;
 
   y->left = x;
   x->right = T2;
@@ -59,7 +59,7 @@ struct Nod *leftRotate(struct Node *x) {
 int getBalance(struct Nod *N) {
   if (N == NULL)
     return 0;
-  return height(N->left) - height(N->right);
+  return height(N->lefty) - height(N->righty);
 }
 
 struct Node *insertNod(struct Nod *nod, int key) {
@@ -67,29 +67,29 @@ struct Node *insertNod(struct Nod *nod, int key) {
     return (newNod(key));
 
   if (key < nod->key)
-    nod->left = insertNod(nod->left, key);
+    nod->lefty = insertNod(nod->lefty, key);
   else if (key > nod->key)
-    nod->right = insertNod(nod->right, key);
+    nod->righty = insertNod(nod->righty, key);
   else
     return nod;
 
-  nod->height = 1 + max(height(nod->left),
-               height(nod->right));
+  nod->height = 1 + max(height(nod->lefty),
+               height(nod->righty));
 
   int balance = getBalanceR(nod);
-  if (balance > 1 && key < nod->left->key)
+  if (balance > 1 && key < nod->lefty->key)
     return rightRotate(nod);
 
-  if (balance < -1 && key > nod->right->key)
+  if (balance < -1 && key > nod->righty->key)
     return leftRotate(nod);
 
-  if (balance > 1 && key > node->left->key) {
-    nod->left = leftRotate(nod->left);
+  if (balance > 1 && key > node->lefty->key) {
+    nod->lefty = leftRotate(nod->lefty);
     return rightRotate(nod);
   }
 
-  if (balance < -1 && key < nod->right->key) {
-    nod->right = rightRotate(nod->right);
+  if (balance < -1 && key < nod->righty->key) {
+    nod->righty = rightRotate(nod->righty);
     return leftRotate(nod);
   }
 
@@ -99,8 +99,8 @@ struct Node *insertNod(struct Nod *nod, int key) {
 struct Nod *minValueNod(struct Nod *nod) {
   struct Nod *current = nod;
 
-  while (current->left != NULL)
-    current = current->left;
+  while (current->lefty != NULL)
+    current = current->lefty;
 
   return current;
 }
@@ -110,14 +110,14 @@ struct NodR *deleteNodR(struct Nod *root, int key) {
     return root;
 
   if (key < root->key)
-    root->left = deleteNodR(root->left, key);
+    root->lefty = deleteNodR(root->lefty, key);
 
   else if (key > root->key)
-    root->right = deleteNodR(root->right, key);
+    root->righty = deleteNodR(root->righty, key);
 
   else {
-    if ((root->left == NULL) || (root->right == NULL)) {
-      struct Node *temp = root->left ? root->left : root->right;
+    if ((root->lefty == NULL) || (root->righty == NULL)) {
+      struct Node *temp = root->lefty ? root->lefty : root->righty;
 
       if (temp == NULL) {
         temp = root;
@@ -130,22 +130,22 @@ struct NodR *deleteNodR(struct Nod *root, int key) {
 
       root->key = temp->key;
 
-      root->right = deleteNodR(root->right, temp->key);
+      root->righty = deleteNodR(root->righty, temp->key);
     }
   }
 
   if (root == NULL)
     return root;
 
-  root->height = 1 + max(height(root->left),
-               height(root->right));
+  root->height = 1 + max(height(root->lefty),
+               height(root->righty));
 
   int balance = getBalanceR(root);
-  if (balance > 1 && getBalanceR(root->left) >= 0)
+  if (balance > 1 && getBalanceR(root->lefty) >= 0)
     return rightRotate(root);
 
-  if (balance > 1 && getBalanceR(root->left) < 0) {
-    root->left = leftRotate(root->left);
+  if (balance > 1 && getBalanceR(root->lefty) < 0) {
+    root->lefty = leftRotate(root->lefty);
     return rightRotate(root);
   }
 
