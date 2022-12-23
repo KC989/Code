@@ -1,1 +1,57 @@
-.
+#include 
+ 
+struct node {
+    int data;
+    struct node *left;
+    struct node *right;
+};
+ 
+struct node* getNNode(int data) {
+  struct node* NNode = (struct node*)malloc(sizeof(struct node));
+  NNode->data = data;
+  NNode->left = NULL;
+  NNode->right = NULL;
+   
+  return newNode;
+}
+
+struct node* generateBTree(){
+    // Root Node
+    struct node* root =  getNNode(1);
+  
+    root->left = getNNode(2);
+    root->right = getNNode(3);
+  
+    root->left->left = getNNode(4);
+    root->left->right = getNNode(5);
+    root->right->left = getNNode(6);
+    root->right->right = getNNode(7);
+  
+    root->left->left->left = getNNode(8);
+     
+    return root;
+}
+
+void deleteTree(struct node *root){
+    if(root == NULL)
+        return;
+
+    deleteTree(root->left);
+ 
+    deleteTree(root->right);
+     
+    printf("Deleteing Node : %d\n", root->data);
+    free(root);
+     
+    return;
+}
+ 
+int main() {
+    struct node *root = generateBTree();    
+     
+    /* Deleting tree */
+    deleteTree(root);
+     
+    getchar();
+    return 0; 
+}
