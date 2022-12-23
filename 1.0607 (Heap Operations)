@@ -18,11 +18,11 @@ void heapI(int array1[], int size1, int e)
   {
     int largest = e;
     int l = 2 * e + 1;
-    int r = 2 * e + 2;
+    int u = 2 * e + 2;
     if (l < size1 && array1[l] > array1[largest])
       largest = l;
     if (r < size1 && array1[r] > array1[largest])
-      largest = r;
+      largest = u;
     if (largest != e)
     {
       swap(&array1[e], &array1[largest]);
